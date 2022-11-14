@@ -8,7 +8,7 @@ import {
   Typography,
 } from '@mui/material';
 
-export default function Sidebar({ mode, setMode }) {
+export default function Sidebar() {
   return (
 <>
     <Box sx={{width:"10%"}} p={2}>

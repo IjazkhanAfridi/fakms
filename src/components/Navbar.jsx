@@ -10,14 +10,12 @@ const StyledToolBar = styled(Toolbar)({
 
 export default function Navbar() {
   return (
-    <AppBar position='sticky' sx={{ bgcolor: 'white' }}>
+    <AppBar position='sticky' sx={{ bgcolor: '#f5f9fc' }}>
       <StyledToolBar>
         <IconButton
           size='large'
           edge='start'
-          // color="inherit"
           aria-label='menu'
-          sx={{ mr: 2 }}
         >
           <MenuIcon />
         </IconButton>
