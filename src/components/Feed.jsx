@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 
+import {Link} from "react-router-dom"
 import { styled, alpha } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
@@ -113,8 +114,8 @@ export default function Feed() {
     setAnchorEl(null);
   };
 
-  const [currency, setCurrency] = React.useState('FAK ULD Location');
-  const [value1, setValue1] = React.useState('FAK ULD Location');
+  const [currency, setCurrency] = React.useState();
+  const [value1, setValue1] = React.useState();
 
   const handleChange = (e) => {
     setValue1(e.target.value);
@@ -187,19 +188,35 @@ export default function Feed() {
             </button>
           </Box>
         </Box>
+          <h2>Master Data category</h2>
         <Box
           sx={{
             mb: '10px',
+            display:"flex",
+            alignItems:"center",
           }}
         >
-          <h2>Master Data category</h2>
+          <TextField
+            sx={{ mt: '10px', mb: '10px',mr:"10px" ,width: 220 }}
+            id='outlined-select-currency'
+            select
+            label='Select'
+            value={currency}
+            onChange={handleChange}
+          >
+            {currencies.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
           <Paper
             component='form'
             sx={{
               p: '2px 4px',
               display: 'flex',
               alignItems: 'center',
-              width: 400,
+              width: 220,
             }}
           >
             <InputBase
@@ -211,23 +228,10 @@ export default function Feed() {
               <SearchIcon />
             </IconButton>
           </Paper>
-          <TextField
-            sx={{ mt: '10px', mb: '10px', width: 400 }}
-            id='outlined-select-currency'
-            select
-            label='Select'
-            value={currency}
-            onChange={handleChange}
-            helperText='Please select'
-          >
-            {currencies.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
+        
         </Box>
-        <Card sx={{ mb: '16px', width: '350px' }}>
+        <Card sx={{ mb: '16px', width: '450px' }}>
+              <Link to={"/table"}>
           <CardHeader
             action={
               <Box>
@@ -265,6 +269,7 @@ export default function Feed() {
             }
             title={value1}
           />
+               </Link>
         </Card>
       </Box>
     </Box>
