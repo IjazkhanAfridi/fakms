@@ -7,7 +7,7 @@ import {
   InputBase,
   Paper,
 } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { styled, alpha } from '@mui/material/styles';
 import Button from '@mui/material/Button';
@@ -61,24 +61,45 @@ const StyledMenu = styled((props) => (
 
 const currencies = [
   {
-    value: 'USD',
-    label: '$',
+    value: 'FAK ULD Location',
+    label: 'FAK ULD Location',
   },
   {
-    value: 'card1',
-    label: 'card1',
+    value: 'FAK Exception Types',
+    label: 'FAK Exception Types',
   },
   {
-    value: 'EUR',
-    label: '€',
+    value: 'Daily FAK Email',
+    label: 'Daily FAK Email',
   },
   {
-    value: 'BTC',
-    label: '฿',
+    value: 'Daily FAK Email CC',
+    label: 'Daily FAK Email CC',
   },
   {
-    value: 'JPY',
-    label: '¥',
+    value: 'Upliftment station Email',
+    label: 'Upliftment station Email',
+  },
+
+  {
+    value: 'Plan remarks',
+    label: 'Plan remarks',
+  },
+  {
+    value: 'Supplier',
+    label: 'Supplier',
+  },
+  {
+    value: 'Default Upliftment To Email',
+    label: 'Default Upliftment To Email',
+  },
+  {
+    value: 'Default Upliftment CC Email',
+    label: 'Default Upliftment CC Email',
+  },
+  {
+    value: 'Base station',
+    label: 'Base station',
   },
 ];
 
@@ -92,17 +113,25 @@ export default function Feed() {
     setAnchorEl(null);
   };
 
-  const [currency, setCurrency] = React.useState('EUR');
+  const [currency, setCurrency] = React.useState('FAK ULD Location');
+  const [value1, setValue1] = React.useState('FAK ULD Location');
 
-  const handleChange = (event) => {
-    setCurrency(event.target.value);
+  const handleChange = (e) => {
+    setValue1(e.target.value);
+    setCurrency(e.target.value);
   };
+
+  // const filterdata = data.data?.filter((items) => {
+  //   return items.value === e.target.value;
+  // });
+  // console.log(currency);
+
   return (
     <Box
       sx={{
         width: '100%',
         bgcolor: '#efefef',
-        height: '100%',
+        height: '100vh',
       }}
     >
       <Box sx={{ ml: '300px', height: '100%' }}>
@@ -189,7 +218,7 @@ export default function Feed() {
             label='Select'
             value={currency}
             onChange={handleChange}
-            helperText='Please select your currency'
+            helperText='Please select'
           >
             {currencies.map((option) => (
               <MenuItem key={option.value} value={option.value}>
@@ -198,45 +227,6 @@ export default function Feed() {
             ))}
           </TextField>
         </Box>
-        <Card sx={{ mb: '16px', width: '350px' }} >
-          <CardHeader
-            action={
-              <Box>
-                <Button
-                  id='demo-customized-button'
-                  aria-controls={open ? 'demo-customized-menu' : undefined}
-                  aria-haspopup='true'
-                  aria-expanded={open ? 'true' : undefined}
-                  disableElevation
-                  onClick={handleClick}
-                >
-                  <IconButton aria-label='settings'>
-                    <MoreVert />
-                  </IconButton>
-                </Button>
-                <StyledMenu
-                  id='demo-customized-menu'
-                  MenuListProps={{
-                    'aria-labelledby': 'demo-customized-button',
-                  }}
-                  anchorEl={anchorEl}
-                  open={open}
-                  onClose={handleClose}
-                >
-                  <MenuItem onClick={handleClose} disableRipple>
-                    <Add />
-                    Add
-                  </MenuItem>
-                  <MenuItem onClick={handleClose} disableRipple>
-                    <Delete />
-                    Delete
-                  </MenuItem>
-                </StyledMenu>
-              </Box>
-            }
-            title={'FAK ULD Location'}
-          />
-        </Card>
         <Card sx={{ mb: '16px', width: '350px' }}>
           <CardHeader
             action={
@@ -273,319 +263,7 @@ export default function Feed() {
                 </StyledMenu>
               </Box>
             }
-            title={'FAK Exception Types'}
-          />
-        </Card>
-        <Card sx={{ mb: '16px', width: '350px' }}>
-          <CardHeader
-            action={
-              <Box>
-                <Button
-                  id='demo-customized-button'
-                  aria-controls={open ? 'demo-customized-menu' : undefined}
-                  aria-haspopup='true'
-                  aria-expanded={open ? 'true' : undefined}
-                  disableElevation
-                  onClick={handleClick}
-                >
-                  <IconButton aria-label='settings'>
-                    <MoreVert />
-                  </IconButton>
-                </Button>
-                <StyledMenu
-                  id='demo-customized-menu'
-                  MenuListProps={{
-                    'aria-labelledby': 'demo-customized-button',
-                  }}
-                  anchorEl={anchorEl}
-                  open={open}
-                  onClose={handleClose}
-                >
-                  <MenuItem onClick={handleClose} disableRipple>
-                    <Add />
-                    Add
-                  </MenuItem>
-                  <MenuItem onClick={handleClose} disableRipple>
-                    <Delete />
-                    Delete
-                  </MenuItem>
-                </StyledMenu>
-              </Box>
-            }
-            title={'Daily FAK Email'}
-          />
-        </Card>
-        <Card sx={{ mb: '16px', width: '350px' }}>
-          <CardHeader
-            action={
-              <Box>
-                <Button
-                  id='demo-customized-button'
-                  aria-controls={open ? 'demo-customized-menu' : undefined}
-                  aria-haspopup='true'
-                  aria-expanded={open ? 'true' : undefined}
-                  disableElevation
-                  onClick={handleClick}
-                >
-                  <IconButton aria-label='settings'>
-                    <MoreVert />
-                  </IconButton>
-                </Button>
-                <StyledMenu
-                  id='demo-customized-menu'
-                  MenuListProps={{
-                    'aria-labelledby': 'demo-customized-button',
-                  }}
-                  anchorEl={anchorEl}
-                  open={open}
-                  onClose={handleClose}
-                >
-                  <MenuItem onClick={handleClose} disableRipple>
-                    <Add />
-                    Add
-                  </MenuItem>
-                  <MenuItem onClick={handleClose} disableRipple>
-                    <Delete />
-                    Delete
-                  </MenuItem>
-                </StyledMenu>
-              </Box>
-            }
-            title={'Daily FAK Email CC'}
-          />
-        </Card>
-        <Card sx={{ mb: '16px', width: '350px' }}>
-          <CardHeader
-            action={
-              <Box>
-                <Button
-                  id='demo-customized-button'
-                  aria-controls={open ? 'demo-customized-menu' : undefined}
-                  aria-haspopup='true'
-                  aria-expanded={open ? 'true' : undefined}
-                  disableElevation
-                  onClick={handleClick}
-                >
-                  <IconButton aria-label='settings'>
-                    <MoreVert />
-                  </IconButton>
-                </Button>
-                <StyledMenu
-                  id='demo-customized-menu'
-                  MenuListProps={{
-                    'aria-labelledby': 'demo-customized-button',
-                  }}
-                  anchorEl={anchorEl}
-                  open={open}
-                  onClose={handleClose}
-                >
-                  <MenuItem onClick={handleClose} disableRipple>
-                    <Add />
-                    Add
-                  </MenuItem>
-                  <MenuItem onClick={handleClose} disableRipple>
-                    <Delete />
-                    Delete
-                  </MenuItem>
-                </StyledMenu>
-              </Box>
-            }
-            title={'Upliftment station Email'}
-          />
-        </Card>
-        <Card sx={{ mb: '16px', width: '350px' }}>
-          <CardHeader
-            action={
-              <Box>
-                <Button
-                  id='demo-customized-button'
-                  aria-controls={open ? 'demo-customized-menu' : undefined}
-                  aria-haspopup='true'
-                  aria-expanded={open ? 'true' : undefined}
-                  disableElevation
-                  onClick={handleClick}
-                >
-                  <IconButton aria-label='settings'>
-                    <MoreVert />
-                  </IconButton>
-                </Button>
-                <StyledMenu
-                  id='demo-customized-menu'
-                  MenuListProps={{
-                    'aria-labelledby': 'demo-customized-button',
-                  }}
-                  anchorEl={anchorEl}
-                  open={open}
-                  onClose={handleClose}
-                >
-                  <MenuItem onClick={handleClose} disableRipple>
-                    <Add />
-                    Add
-                  </MenuItem>
-                  <MenuItem onClick={handleClose} disableRipple>
-                    <Delete />
-                    Delete
-                  </MenuItem>
-                </StyledMenu>
-              </Box>
-            }
-            title={'Plan remarks'}
-          />
-        </Card>
-        <Card sx={{ mb: '16px', width: '350px' }}>
-          <CardHeader
-            action={
-              <Box>
-                <Button
-                  id='demo-customized-button'
-                  aria-controls={open ? 'demo-customized-menu' : undefined}
-                  aria-haspopup='true'
-                  aria-expanded={open ? 'true' : undefined}
-                  disableElevation
-                  onClick={handleClick}
-                >
-                  <IconButton aria-label='settings'>
-                    <MoreVert />
-                  </IconButton>
-                </Button>
-                <StyledMenu
-                  id='demo-customized-menu'
-                  MenuListProps={{
-                    'aria-labelledby': 'demo-customized-button',
-                  }}
-                  anchorEl={anchorEl}
-                  open={open}
-                  onClose={handleClose}
-                >
-                  <MenuItem onClick={handleClose} disableRipple>
-                    <Add />
-                    Add
-                  </MenuItem>
-                  <MenuItem onClick={handleClose} disableRipple>
-                    <Delete />
-                    Delete
-                  </MenuItem>
-                </StyledMenu>
-              </Box>
-            }
-            title={'Supplier'}
-          />
-        </Card>
-        <Card sx={{ mb: '16px', width: '350px' }}>
-          <CardHeader
-            action={
-              <Box>
-                <Button
-                  id='demo-customized-button'
-                  aria-controls={open ? 'demo-customized-menu' : undefined}
-                  aria-haspopup='true'
-                  aria-expanded={open ? 'true' : undefined}
-                  disableElevation
-                  onClick={handleClick}
-                >
-                  <IconButton aria-label='settings'>
-                    <MoreVert />
-                  </IconButton>
-                </Button>
-                <StyledMenu
-                  id='demo-customized-menu'
-                  MenuListProps={{
-                    'aria-labelledby': 'demo-customized-button',
-                  }}
-                  anchorEl={anchorEl}
-                  open={open}
-                  onClose={handleClose}
-                >
-                  <MenuItem onClick={handleClose} disableRipple>
-                    <Add />
-                    Add
-                  </MenuItem>
-                  <MenuItem onClick={handleClose} disableRipple>
-                    <Delete />
-                    Delete
-                  </MenuItem>
-                </StyledMenu>
-              </Box>
-            }
-            title={'Default Upliftment To Email'}
-          />
-        </Card>
-        <Card sx={{ mb: '16px', width: '350px' }}>
-          <CardHeader
-            action={
-              <Box>
-                <Button
-                  id='demo-customized-button'
-                  aria-controls={open ? 'demo-customized-menu' : undefined}
-                  aria-haspopup='true'
-                  aria-expanded={open ? 'true' : undefined}
-                  disableElevation
-                  onClick={handleClick}
-                >
-                  <IconButton aria-label='settings'>
-                    <MoreVert />
-                  </IconButton>
-                </Button>
-                <StyledMenu
-                  id='demo-customized-menu'
-                  MenuListProps={{
-                    'aria-labelledby': 'demo-customized-button',
-                  }}
-                  anchorEl={anchorEl}
-                  open={open}
-                  onClose={handleClose}
-                >
-                  <MenuItem onClick={handleClose} disableRipple>
-                    <Add />
-                    Add
-                  </MenuItem>
-                  <MenuItem onClick={handleClose} disableRipple>
-                    <Delete />
-                    Delete
-                  </MenuItem>
-                </StyledMenu>
-              </Box>
-            }
-            title={'Default Upliftment CC Email'}
-          />
-        </Card>
-        <Card sx={{ mb: '16px', width: '350px' }}>
-          <CardHeader
-            action={
-              <Box>
-                <Button
-                  id='demo-customized-button'
-                  aria-controls={open ? 'demo-customized-menu' : undefined}
-                  aria-haspopup='true'
-                  aria-expanded={open ? 'true' : undefined}
-                  disableElevation
-                  onClick={handleClick}
-                >
-                  <IconButton aria-label='settings'>
-                    <MoreVert />
-                  </IconButton>
-                </Button>
-                <StyledMenu
-                  id='demo-customized-menu'
-                  MenuListProps={{
-                    'aria-labelledby': 'demo-customized-button',
-                  }}
-                  anchorEl={anchorEl}
-                  open={open}
-                  onClose={handleClose}
-                >
-                  <MenuItem onClick={handleClose} disableRipple>
-                    <Add />
-                    Add
-                  </MenuItem>
-                  <MenuItem onClick={handleClose} disableRipple>
-                    <Delete />
-                    Delete
-                  </MenuItem>
-                </StyledMenu>
-              </Box>
-            }
-            title={'Base station'}
+            title={value1}
           />
         </Card>
       </Box>
