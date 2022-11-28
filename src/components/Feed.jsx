@@ -1,12 +1,20 @@
 import { Add, Delete, MoreVert } from '@mui/icons-material';
-import { Box, Card, CardHeader, IconButton } from '@mui/material';
+import {
+  Box,
+  Card,
+  CardHeader,
+  IconButton,
+  InputBase,
+  Paper,
+} from '@mui/material';
 import React from 'react';
 
 import { styled, alpha } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -27,7 +35,9 @@ const StyledMenu = styled((props) => (
     marginTop: theme.spacing(1),
     minWidth: 180,
     color:
-      theme.palette.mode === 'light' ? 'rgb(55, 65, 81)' : theme.palette.grey[300],
+      theme.palette.mode === 'light'
+        ? 'rgb(55, 65, 81)'
+        : theme.palette.grey[300],
     boxShadow:
       'rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px',
     '& .MuiMenu-list': {
@@ -42,12 +52,35 @@ const StyledMenu = styled((props) => (
       '&:active': {
         backgroundColor: alpha(
           theme.palette.primary.main,
-          theme.palette.action.selectedOpacity,
+          theme.palette.action.selectedOpacity
         ),
       },
     },
   },
 }));
+
+const currencies = [
+  {
+    value: 'USD',
+    label: '$',
+  },
+  {
+    value: 'card1',
+    label: 'card1',
+  },
+  {
+    value: 'EUR',
+    label: '€',
+  },
+  {
+    value: 'BTC',
+    label: '฿',
+  },
+  {
+    value: 'JPY',
+    label: '¥',
+  },
+];
 
 export default function Feed() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -57,6 +90,12 @@ export default function Feed() {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const [currency, setCurrency] = React.useState('EUR');
+
+  const handleChange = (event) => {
+    setCurrency(event.target.value);
   };
   return (
     <Box
@@ -69,6 +108,7 @@ export default function Feed() {
       <Box sx={{ ml: '300px', height: '100%' }}>
         <Box sx={{ mt: '30px' }}>
           <h1>Adminstration</h1>
+
           <Box sx={{ display: 'flex' }}>
             <button
               style={{
@@ -118,8 +158,47 @@ export default function Feed() {
             </button>
           </Box>
         </Box>
-        <h2>Master Data category</h2>
-        <Card sx={{ mb: '16px', width: '350px' }}>
+        <Box
+          sx={{
+            mb: '10px',
+          }}
+        >
+          <h2>Master Data category</h2>
+          <Paper
+            component='form'
+            sx={{
+              p: '2px 4px',
+              display: 'flex',
+              alignItems: 'center',
+              width: 400,
+            }}
+          >
+            <InputBase
+              sx={{ ml: 1, flex: 1 }}
+              placeholder='Search...'
+              inputProps={{ 'aria-label': 'search...' }}
+            />
+            <IconButton type='button' sx={{ p: '10px' }} aria-label='search'>
+              <SearchIcon />
+            </IconButton>
+          </Paper>
+          <TextField
+            sx={{ mt: '10px', mb: '10px', width: 400 }}
+            id='outlined-select-currency'
+            select
+            label='Select'
+            value={currency}
+            onChange={handleChange}
+            helperText='Please select your currency'
+          >
+            {currencies.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        </Box>
+        <Card sx={{ mb: '16px', width: '350px' }} >
           <CardHeader
             action={
               <Box>
@@ -146,13 +225,12 @@ export default function Feed() {
                 >
                   <MenuItem onClick={handleClose} disableRipple>
                     <Add />
-                   Add
+                    Add
                   </MenuItem>
                   <MenuItem onClick={handleClose} disableRipple>
                     <Delete />
                     Delete
                   </MenuItem>
-                 
                 </StyledMenu>
               </Box>
             }
@@ -186,13 +264,12 @@ export default function Feed() {
                 >
                   <MenuItem onClick={handleClose} disableRipple>
                     <Add />
-                   Add
+                    Add
                   </MenuItem>
                   <MenuItem onClick={handleClose} disableRipple>
                     <Delete />
                     Delete
                   </MenuItem>
-                 
                 </StyledMenu>
               </Box>
             }
@@ -226,13 +303,12 @@ export default function Feed() {
                 >
                   <MenuItem onClick={handleClose} disableRipple>
                     <Add />
-                   Add
+                    Add
                   </MenuItem>
                   <MenuItem onClick={handleClose} disableRipple>
                     <Delete />
                     Delete
                   </MenuItem>
-                 
                 </StyledMenu>
               </Box>
             }
@@ -266,13 +342,12 @@ export default function Feed() {
                 >
                   <MenuItem onClick={handleClose} disableRipple>
                     <Add />
-                   Add
+                    Add
                   </MenuItem>
                   <MenuItem onClick={handleClose} disableRipple>
                     <Delete />
                     Delete
                   </MenuItem>
-                 
                 </StyledMenu>
               </Box>
             }
@@ -306,13 +381,12 @@ export default function Feed() {
                 >
                   <MenuItem onClick={handleClose} disableRipple>
                     <Add />
-                   Add
+                    Add
                   </MenuItem>
                   <MenuItem onClick={handleClose} disableRipple>
                     <Delete />
                     Delete
                   </MenuItem>
-                 
                 </StyledMenu>
               </Box>
             }
@@ -346,13 +420,12 @@ export default function Feed() {
                 >
                   <MenuItem onClick={handleClose} disableRipple>
                     <Add />
-                   Add
+                    Add
                   </MenuItem>
                   <MenuItem onClick={handleClose} disableRipple>
                     <Delete />
                     Delete
                   </MenuItem>
-                 
                 </StyledMenu>
               </Box>
             }
@@ -386,13 +459,12 @@ export default function Feed() {
                 >
                   <MenuItem onClick={handleClose} disableRipple>
                     <Add />
-                   Add
+                    Add
                   </MenuItem>
                   <MenuItem onClick={handleClose} disableRipple>
                     <Delete />
                     Delete
                   </MenuItem>
-                 
                 </StyledMenu>
               </Box>
             }
@@ -426,13 +498,12 @@ export default function Feed() {
                 >
                   <MenuItem onClick={handleClose} disableRipple>
                     <Add />
-                   Add
+                    Add
                   </MenuItem>
                   <MenuItem onClick={handleClose} disableRipple>
                     <Delete />
                     Delete
                   </MenuItem>
-                 
                 </StyledMenu>
               </Box>
             }
@@ -466,13 +537,12 @@ export default function Feed() {
                 >
                   <MenuItem onClick={handleClose} disableRipple>
                     <Add />
-                   Add
+                    Add
                   </MenuItem>
                   <MenuItem onClick={handleClose} disableRipple>
                     <Delete />
                     Delete
                   </MenuItem>
-                 
                 </StyledMenu>
               </Box>
             }
@@ -506,13 +576,12 @@ export default function Feed() {
                 >
                   <MenuItem onClick={handleClose} disableRipple>
                     <Add />
-                   Add
+                    Add
                   </MenuItem>
                   <MenuItem onClick={handleClose} disableRipple>
                     <Delete />
                     Delete
                   </MenuItem>
-                 
                 </StyledMenu>
               </Box>
             }
