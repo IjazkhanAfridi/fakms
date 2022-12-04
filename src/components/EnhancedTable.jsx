@@ -1,13 +1,13 @@
-import * as React from 'react';
+import { Add, Delete, MoreVert } from '@mui/icons-material'
 import PropTypes from 'prop-types';
 import { alpha } from '@mui/material/styles';
+import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
@@ -16,11 +16,15 @@ import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
+import MenuItem from '@mui/material/MenuItem';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
+
+import React, { useContext } from 'react';
+import { StateContext } from '../context/StateContext';
+
 
 function createData(name, calories, fat, carbs, protein) {
   return {
@@ -109,6 +113,12 @@ const headCells = [
     disablePadding: false,
     label: 'Protein (g)',
   },
+  {
+    id: 'Actions',
+    numeric: false,
+    disablePadding: false,
+    label: 'Actions',
+  },
 ];
 
 function EnhancedTableHead(props) {
@@ -116,7 +126,10 @@ function EnhancedTableHead(props) {
     props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
+
   };
+
+
 
   return (
     <TableHead>
@@ -169,6 +182,7 @@ EnhancedTableHead.propTypes = {
 
 function EnhancedTableToolbar(props) {
   const { numSelected } = props;
+  const {title} = useContext(StateContext);
 
   return (
     <Toolbar
@@ -197,7 +211,7 @@ function EnhancedTableToolbar(props) {
           id="tableTitle"
           component="div"
         >
-          Nutrition
+           {title}
         </Typography>
       )}
 
@@ -229,6 +243,10 @@ export default function EnhancedTable() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -265,6 +283,8 @@ export default function EnhancedTable() {
     setSelected(newSelected);
   };
 
+  
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -283,6 +303,14 @@ export default function EnhancedTable() {
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+
+  
+    const {setOpen} = useContext(StateContext)
+  
+  
+    const openSideBar = () => {
+      setOpen(true);
+    }
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -342,23 +370,31 @@ export default function EnhancedTable() {
                       <TableCell align="right">{row.fat}</TableCell>
                       <TableCell align="right">{row.carbs}</TableCell>
                       <TableCell align="right">{row.protein}</TableCell>
-                    </TableRow>
-                  );
-                })}
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 33 : 53) * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Paper>
+                      <TableCell align="right">
+                        <Button onClick={openSideBar}> 
+                          Edit  
+                        </Button>
+                     
 
-    </Box>
+                    </TableCell>
+
+                    </TableRow>
+            );
+                })}
+            {emptyRows > 0 && (
+              <TableRow
+                style={{
+                  height: (dense ? 33 : 53) * emptyRows,
+                }}
+              >
+                <TableCell colSpan={6} />
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Paper>
+
+    </Box >
   );
 }

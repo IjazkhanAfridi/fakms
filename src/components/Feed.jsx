@@ -8,14 +8,18 @@ import {
   Paper,
 } from '@mui/material';
 import React, { useState } from 'react';
-
-import {Link} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import EnhancedTable from './EnhancedTable'
 import { styled, alpha } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
+
+import  { useContext } from 'react';
+import { StateContext } from '../context/StateContext';
+
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -106,19 +110,14 @@ const currencies = [
 
 export default function Feed() {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const {title, setTitle} = useContext(StateContext);
+
+
 
   const [currency, setCurrency] = React.useState();
-  const [value1, setValue1] = React.useState();
 
   const handleChange = (e) => {
-    setValue1(e.target.value);
+    setTitle(e.target.value);
     setCurrency(e.target.value);
   };
 
@@ -126,6 +125,7 @@ export default function Feed() {
   //   return items.value === e.target.value;
   // });
   // console.log(currency);
+
 
   return (
     <Box
@@ -205,7 +205,7 @@ export default function Feed() {
             onChange={handleChange}
           >
             {currencies.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
+              <MenuItem  key={option.value} value={option.value}>
                 {option.label}
               </MenuItem>
             ))}
@@ -230,47 +230,14 @@ export default function Feed() {
           </Paper>
         
         </Box>
-        <Card sx={{ mb: '16px', width: '450px' }}>
-              <Link to={"/table"}>
-          <CardHeader
-            action={
-              <Box>
-                <Button
-                  id='demo-customized-button'
-                  aria-controls={open ? 'demo-customized-menu' : undefined}
-                  aria-haspopup='true'
-                  aria-expanded={open ? 'true' : undefined}
-                  disableElevation
-                  onClick={handleClick}
-                >
-                  <IconButton aria-label='settings'>
-                    <MoreVert />
-                  </IconButton>
-                </Button>
-                <StyledMenu
-                  id='demo-customized-menu'
-                  MenuListProps={{
-                    'aria-labelledby': 'demo-customized-button',
-                  }}
-                  anchorEl={anchorEl}
-                  open={open}
-                  onClose={handleClose}
-                >
-                  <MenuItem onClick={handleClose} disableRipple>
-                    <Add />
-                    Add
-                  </MenuItem>
-                  <MenuItem onClick={handleClose} disableRipple>
-                    <Delete />
-                    Delete
-                  </MenuItem>
-                </StyledMenu>
-              </Box>
-            }
-            title={value1}
-          />
-               </Link>
+
+
+        <Card >
+          <EnhancedTable />
+
         </Card>
+
+
       </Box>
     </Box>
   );

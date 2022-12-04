@@ -15,12 +15,13 @@ function App() {
         <Navbar />
         <Stack direction='row' spacing={2} justifyContent='space-between'>
           <Sidebar/>
-          <Feed />
+          <Routes >
+          <Route  path={'/'} element={<Feed />} />
+
+        </Routes>
         <Addpost />
         </Stack>
-        <Routes >
-          <Route path={'/table'} element={<EnhancedTable />} />
-        </Routes>
+
       </Box>
       </BrowserRouter>
   )

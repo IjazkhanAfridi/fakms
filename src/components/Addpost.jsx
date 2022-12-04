@@ -13,6 +13,10 @@ import Collapse from '@mui/material/Collapse';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 
+import { useContext } from 'react';
+import { StateContext } from '../context/StateContext';
+
+
 const icon = (
   <Paper sx={{ m: 1 }} elevation={4}>
     <Box component='svg' sx={{ width: 100, height: 100 }}>
@@ -45,7 +49,7 @@ export default function Addpost() {
   const handleClick = () => {
     setOpenmanu(!openmanu);
   };
-  const [open, setOpen] = useState(false);
+  const {open, setOpen} = useContext(StateContext);
 
   return (
     <Box>
