@@ -8,8 +8,8 @@ import {
   Paper,
 } from '@mui/material';
 import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
-import EnhancedTable from './EnhancedTable'
+import { useNavigate } from 'react-router-dom';
+
 import { styled, alpha } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
@@ -17,9 +17,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 
-import  { useContext } from 'react';
+import { useContext } from 'react';
 import { StateContext } from '../context/StateContext';
-
+import Table from './Table';
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -110,9 +110,7 @@ const currencies = [
 
 export default function Feed() {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const {title, setTitle} = useContext(StateContext);
-
-
+  const { title, setTitle } = useContext(StateContext);
 
   const [currency, setCurrency] = React.useState();
 
@@ -125,7 +123,6 @@ export default function Feed() {
   //   return items.value === e.target.value;
   // });
   // console.log(currency);
-
 
   return (
     <Box
@@ -188,16 +185,16 @@ export default function Feed() {
             </button>
           </Box>
         </Box>
-          <h2>Master Data category</h2>
+        <h2>Master Data category</h2>
         <Box
           sx={{
             mb: '10px',
-            display:"flex",
-            alignItems:"center",
+            display: 'flex',
+            alignItems: 'center',
           }}
         >
           <TextField
-            sx={{ mt: '10px', mb: '10px',mr:"10px" ,width: 220 }}
+            sx={{ mt: '10px', mb: '10px', mr: '10px', width: 220 }}
             id='outlined-select-currency'
             select
             label='Select'
@@ -205,7 +202,7 @@ export default function Feed() {
             onChange={handleChange}
           >
             {currencies.map((option) => (
-              <MenuItem  key={option.value} value={option.value}>
+              <MenuItem key={option.value} value={option.value}>
                 {option.label}
               </MenuItem>
             ))}
@@ -228,16 +225,11 @@ export default function Feed() {
               <SearchIcon />
             </IconButton>
           </Paper>
-        
         </Box>
 
-
-        <Card >
-          <EnhancedTable />
-
+        <Card>
+          <Table />
         </Card>
-
-
       </Box>
     </Box>
   );
