@@ -1,37 +1,12 @@
 import styled from '@emotion/styled';
-import { Add, BabyChangingStationRounded, Close } from '@mui/icons-material';
-import { Box, Button, Fab, Modal, TextField, Tooltip } from '@mui/material';
+import { Add, Close } from '@mui/icons-material';
+import { Fab, Modal } from '@mui/material';
 import React from 'react';
 import { useState } from 'react';
 
-import Paper from '@mui/material/Paper';
-import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Collapse from '@mui/material/Collapse';
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
-
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { useContext } from 'react';
 import { StateContext } from '../context/StateContext';
-
-
-const icon = (
-  <Paper sx={{ m: 1 }} elevation={4}>
-    <Box component='svg' sx={{ width: 100, height: 100 }}>
-      <Box
-        component='polygon'
-        sx={{
-          fill: (theme) => theme.palette.common.white,
-          stroke: (theme) => theme.palette.divider,
-          strokeWidth: 1,
-        }}
-        points='0,100 50,00, 100,100'
-      />
-    </Box>
-  </Paper>
-);
 
 const StyleModal = styled(Modal)({
   display: 'flex',
@@ -39,362 +14,318 @@ const StyleModal = styled(Modal)({
   justifyContent: 'end',
 });
 export default function Addpost() {
-  const [openmanu, setOpenmanu] = React.useState(false);
   const [dwc, setDwc] = useState(false);
   const [fak, setFak] = useState(false);
   const [bay, setBay] = useState(false);
   const [lms, setLms] = useState(false);
   const [fly, setFly] = useState(false);
 
-  const handleClick = () => {
-    setOpenmanu(!openmanu);
-  };
-  const {open, setOpen} = useContext(StateContext);
+  const { open, setOpen } = useContext(StateContext);
 
   return (
-    <Box>
-      <Tooltip
+    <div>
+      <button
         onClick={(e) => setOpen(true)}
         title='Add'
-        sx={{
+        style={{
           position: 'fixed',
           bottom: 20,
-          right: { xs: 'calc(10px)', md: 60 },
+          right: 40,
         }}
       >
         <Fab color='primary' aria-label='Add'>
           <Add style={{ color: 'white !important' }} />
         </Fab>
-      </Tooltip>
+      </button>
       <StyleModal
         open={open}
         onClose={(e) => setOpen(false)}
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'
       >
-        <Box
-          bgcolor={'#F2F2FC'}
-          width={'25%'}
-          height={'100vh'}
-          p={3}
+        <div
+          className='h-screen p-3 rounded bg-sky-50'
           borderRadius={5}
+          style={{ overflowY: 'auto', width: '25%' }}
         >
-          <Tooltip
+          <button
             onClick={(e) => setOpen(false)}
             title='close'
-            sx={{
+            style={{
               position: 'fixed',
               top: 10,
-              right: { xs: 'calc(8px)', md: 40 },
+              right: 40,
             }}
           >
             <Close style={{ color: 'white !important' }} />
-          </Tooltip>
+          </button>
           <h3 style={{ marginTop: '40px' }}>FAK ULD Location</h3>
-          <Box sx={{ mt: '5px', bgcolor: 'white' }}>
-            <ListItemButton onClick={handleClick}>
-              <ListItemIcon>
-                {openmanu ? <ExpandLess /> : <ExpandMore />}
-              </ListItemIcon>
-              <ListItemText primary='MS BULK AREA' />
-            </ListItemButton>
-            <Collapse
-              in={openmanu}
-              timeout='auto'
-              unmountOnExit
-              sx={{ mx: '18px' }}
+
+          <div className='mt-2'>
+            <div
+              onClick={() => setDwc(!dwc)}
+              class='bg-white overflow-hidden px-4 py-2  flex items-center hover:cursor-pointer'
             >
-              <List component='div' disablePadding>
-                <Box
-                  sx={{
-                    width: 500,
-                    maxWidth: '100%',
-                  }}
-                >
-                  <TextField fullWidth label='Location' id='' required />
-                </Box>
-                <Box
-                  sx={{
-                    width: 500,
-                    maxWidth: '100%',
-                    mt: '5px',
-                  }}
-                >
-                  <TextField fullWidth label='Description' id='' required />
-                  <Box
-                    sx={{
-                      width: '100%',
-                      my: '10px',
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                    }}
-                  >
-                    <Box>
-                      <Button> Delete</Button>
-                    </Box>
-                    <Box>
-                      <Button>cancel</Button>
-                      <Button variant='contained'>save</Button>
-                    </Box>
-                  </Box>
-                </Box>
-              </List>
-            </Collapse>
-          </Box>
-          <Box sx={{ mt: '5px', bgcolor: 'white' }}>
-            <ListItemButton onClick={(e) => setDwc(!dwc)}>
-              <ListItemIcon>
-                {dwc ? <ExpandLess /> : <ExpandMore />}
-              </ListItemIcon>
-              <ListItemText primary='DWC Bay Area' />
-            </ListItemButton>
-            <Collapse in={dwc} timeout='auto' unmountOnExit sx={{ mx: '18px' }}>
-              <List component='div' disablePadding>
-                <Box
-                  sx={{
-                    width: 500,
-                    maxWidth: '100%',
-                  }}
-                >
-                  <TextField fullWidth label='Location' id='' required />
-                </Box>
-                <Box
-                  sx={{
-                    width: 500,
-                    maxWidth: '100%',
-                    mt: '5px',
-                  }}
-                >
-                  <TextField fullWidth label='Description' id='' required />
-                  <Box
-                    sx={{
-                      width: '100%',
-                      my: '10px',
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                    }}
-                  >
-                    <Box>
-                      <Button> Delete</Button>
-                    </Box>
-                    <Box>
-                      <Button>cancel</Button>
-                      <Button variant='contained'>save</Button>
-                    </Box>
-                  </Box>
-                </Box>
-              </List>
-            </Collapse>
-          </Box>
-          <Box sx={{ mt: '5px', bgcolor: 'white' }}>
-            <ListItemButton
-              onClick={(e) => {
-                setFak(!fak);
-              }}
+              {dwc ? <ExpandLess /> : <ExpandMore />}
+              <span className='ml-2'> MS BULK AREA </span>
+            </div>
+
+            <div
+              class={`${
+                dwc ? `w-100 opacity-100 visible h-100` : 'invisible hidden'
+              }  w-full   border-light bg-white px-5 py-2 shadow-card transition-all`}
             >
-              <ListItemIcon>
-                {fak ? <ExpandLess /> : <ExpandMore />}
-              </ListItemIcon>
-              <ListItemText primary='Fake Holding/Staging Area opposie C-64 Bay Near Concourse' />
-            </ListItemButton>
-            <Collapse in={fak} timeout='auto' unmountOnExit sx={{ mx: '18px' }}>
-              <List component='div' disablePadding>
-                <Box
-                  sx={{
-                    width: 500,
-                    maxWidth: '100%',
-                  }}
-                >
-                  <TextField fullWidth label='Location' id='' required />
-                </Box>
-                <Box
-                  sx={{
-                    width: 500,
-                    maxWidth: '100%',
-                    mt: '5px',
-                  }}
-                >
-                  <TextField fullWidth label='Description' id='' required />
-                  <Box
-                    sx={{
-                      width: '100%',
-                      my: '10px',
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                    }}
+              <input
+                type='text'
+                className='w-full flex justify-center border rounded p-3 my-1'
+                placeholder='Location'
+                required
+              />
+              <input
+                type='text'
+                className='w-full flex justify-center border rounded p-3'
+                placeholder='Description'
+                required
+              />
+              <div className='w-100 my-2 flex justify-between '>
+                <div>
+                  <button
+                    type='button'
+                    class='py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700'
                   >
-                    <Box>
-                      <Button> Delete</Button>
-                    </Box>
-                    <Box>
-                      <Button>cancel</Button>
-                      <Button variant='contained'>save</Button>
-                    </Box>
-                  </Box>
-                </Box>
-              </List>
-            </Collapse>
-          </Box>
-          <Box sx={{ mt: '5px', bgcolor: 'white' }}>
-            <ListItemButton onClick={(e) => setBay(!bay)}>
-              <ListItemIcon>
-                {bay ? <ExpandLess /> : <ExpandMore />}
-              </ListItemIcon>
-              <ListItemText primary='Bay G21' />
-            </ListItemButton>
-            <Collapse in={bay} timeout='auto' unmountOnExit sx={{ mx: '18px' }}>
-              <List component='div' disablePadding>
-                <Box
-                  sx={{
-                    width: 500,
-                    maxWidth: '100%',
-                  }}
-                >
-                  <TextField fullWidth label='Location' id='' required />
-                </Box>
-                <Box
-                  sx={{
-                    width: 500,
-                    maxWidth: '100%',
-                    mt: '5px',
-                  }}
-                >
-                  <TextField fullWidth label='Description' id='' required />
-                  <Box
-                    sx={{
-                      width: '100%',
-                      my: '10px',
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                    }}
+                    Delete
+                  </button>{' '}
+                </div>
+                <div>
+                  <button
+                    type='button'
+                    class='py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700'
                   >
-                    <Box>
-                      <Button> Delete</Button>
-                    </Box>
-                    <Box>
-                      <Button>cancel</Button>
-                      <Button variant='contained'>save</Button>
-                    </Box>
-                  </Box>
-                </Box>
-              </List>
-            </Collapse>
-          </Box>
-          <Box sx={{ mt: '5px', bgcolor: 'white' }}>
-            <ListItemButton onClick={(e) => setLms(!lms)}>
-              <ListItemIcon>
-                {lms ? <ExpandLess /> : <ExpandMore />}
-              </ListItemIcon>
-              <ListItemText primary='LMS1 Near Store or LMS1 Parking Area' />
-            </ListItemButton>
-            <Collapse in={lms} timeout='auto' unmountOnExit sx={{ mx: '18px' }}>
-              <List component='div' disablePadding>
-                <Box
-                  sx={{
-                    width: 500,
-                    maxWidth: '100%',
-                  }}
-                >
-                  <TextField fullWidth label='Location' id='' required />
-                </Box>
-                <Box
-                  sx={{
-                    width: 500,
-                    maxWidth: '100%',
-                    mt: '5px',
-                  }}
-                >
-                  <TextField fullWidth label='Description' id='' required />
-                  <Box
-                    sx={{
-                      width: '100%',
-                      my: '10px',
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                    }}
+                    Cancel
+                  </button>{' '}
+                  <button
+                    type='button'
+                    class='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
                   >
-                    <Box>
-                      <Button> Delete</Button>
-                    </Box>
-                    <Box>
-                      <Button>cancel</Button>
-                      <Button variant='contained'>save</Button>
-                    </Box>
-                  </Box>
-                </Box>
-              </List>
-            </Collapse>
-          </Box>
-          <Box sx={{ mt: '5px', bgcolor: 'white' }}>
-            <ListItemButton onClick={(e) => setFly(!fly)}>
-              <ListItemIcon>
-                {fly ? <ExpandLess /> : <ExpandMore />}
-              </ListItemIcon>
-              <ListItemText primary='Flying Out/In to STNS/DXB DWC' />
-            </ListItemButton>
-            <Collapse in={fly} timeout='auto' unmountOnExit sx={{ mx: '18px' }}>
-              <List component='div' disablePadding>
-                <Box
-                  sx={{
-                    width: 500,
-                    maxWidth: '100%',
-                  }}
-                >
-                  <TextField fullWidth label='Location' id='' required />
-                </Box>
-                <Box
-                  sx={{
-                    width: 500,
-                    maxWidth: '100%',
-                    mt: '5px',
-                  }}
-                >
-                  <TextField fullWidth label='Description' id='' required />
-                  <Box
-                    sx={{
-                      width: '100%',
-                      my: '10px',
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                    }}
-                  >
-                    <Box>
-                      <Button> Delete</Button>
-                    </Box>
-                    <Box>
-                      <Button>cancel</Button>
-                      <Button variant='contained'>save</Button>
-                    </Box>
-                  </Box>
-                </Box>
-              </List>
-            </Collapse>
-          </Box>
-          <Box sx={{ mt: '5px', bgcolor: 'white' }}>
-            <ListItemButton
-              sx={{
-                position: 'fixed',
-                bottom: '0px',
-                m: '10px',
-                bgcolor: 'white',
-                width: '25%',
-              }}
+                    Save
+                  </button>{' '}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className='mt-2'>
+            <div
+              onClick={() => setFak(!fak)}
+              class='bg-white overflow-hidden px-4 py-2  flex items-center hover:cursor-pointer'
             >
-              <Box
-                sx={{
-                  width: '100%',
-                  bgcolor: 'white',
-                  display: 'flex',
-                  justifyContent: 'end',
-                }}
-              >
-                <Button>cancel</Button>
-                <Button variant='contained'>save</Button>
-              </Box>
-            </ListItemButton>
-          </Box>
-        </Box>
+              {fak ? <ExpandLess /> : <ExpandMore />}
+              <span className='ml-2'> DWC Bay Area </span>
+            </div>
+
+            <div
+              class={`${
+                fak ? `w-100 opacity-100 visible h-100` : 'invisible hidden'
+              }  w-full   border-light bg-white px-5 py-2 shadow-card transition-all`}
+            >
+              <input
+                type='text'
+                className='w-full flex justify-center border rounded p-3 my-1'
+                placeholder='Location'
+                required
+              />
+              <input
+                type='text'
+                className='w-full flex justify-center border rounded p-3'
+                placeholder='Description'
+                required
+              />
+              <div className='w-100 my-2 flex justify-between '>
+                <div>
+                  <button
+                    type='button'
+                    class='py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700'
+                  >
+                    Delete
+                  </button>{' '}
+                </div>
+                <div>
+                  <button
+                    type='button'
+                    class='py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700'
+                  >
+                    Cancel
+                  </button>{' '}
+                  <button
+                    type='button'
+                    class='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
+                  >
+                    Save
+                  </button>{' '}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='mt-2'>
+            <div
+              onClick={() => setBay(!bay)}
+              class='bg-white overflow-hidden px-4 py-2  flex items-center hover:cursor-pointer'
+            >
+              {bay ? <ExpandLess /> : <ExpandMore />}
+              <span className='ml-2'>
+                Fake Holding/Staging Area opposie C-64 Bay Near Concourse{' '}
+              </span>
+            </div>
+
+            <div
+              class={`${
+                bay ? `w-100 opacity-100 visible h-100` : 'invisible hidden'
+              }  w-full   border-light bg-white px-5 py-2 shadow-card transition-all`}
+            >
+              <input
+                type='text'
+                className='w-full flex justify-center border rounded p-3 my-1'
+                placeholder='Location'
+                required
+              />
+              <input
+                type='text'
+                className='w-full flex justify-center border rounded p-3'
+                placeholder='Description'
+                required
+              />
+              <div className='w-100 my-2 flex justify-between '>
+                <div>
+                  <button
+                    type='button'
+                    class='py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700'
+                  >
+                    Delete
+                  </button>{' '}
+                </div>
+                <div>
+                  <button
+                    type='button'
+                    class='py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700'
+                  >
+                    Cancel
+                  </button>{' '}
+                  <button
+                    type='button'
+                    class='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
+                  >
+                    Save
+                  </button>{' '}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='mt-2'>
+            <div
+              onClick={() => setLms(!lms)}
+              class='bg-white overflow-hidden px-4 py-2  flex items-center hover:cursor-pointer'
+            >
+              {lms ? <ExpandLess /> : <ExpandMore />}
+              <span className='ml-2'>Flying Out/In to STNS/DXB DWC</span>
+            </div>
+
+            <div
+              class={`${
+                lms ? `w-100 opacity-100 visible h-100` : 'invisible hidden'
+              }  w-full   border-light bg-white px-5 py-2 shadow-card transition-all`}
+            >
+              <input
+                type='text'
+                className='w-full flex justify-center border rounded p-3 my-1'
+                placeholder='Location'
+                required
+              />
+              <input
+                type='text'
+                className='w-full flex justify-center border rounded p-3'
+                placeholder='Description'
+                required
+              />
+              <div className='w-100 my-2 flex justify-between '>
+                <div>
+                  <button
+                    type='button'
+                    class='py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700'
+                  >
+                    Delete
+                  </button>{' '}
+                </div>
+                <div>
+                  <button
+                    type='button'
+                    class='py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700'
+                  >
+                    Cancel
+                  </button>{' '}
+                  <button
+                    type='button'
+                    class='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
+                  >
+                    Save
+                  </button>{' '}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='mt-2'>
+            <div
+              onClick={() => setFly(!fly)}
+              class='bg-white overflow-hidden px-4 py-2  flex items-center hover:cursor-pointer'
+            >
+              {fly ? <ExpandLess /> : <ExpandMore />}
+              <span className='ml-2'> Bay G21 </span>
+            </div>
+
+            <div
+              class={`${
+                fly ? `w-100 opacity-100 visible h-100` : 'invisible hidden'
+              }  w-full   border-light bg-white px-5 py-2 shadow-card transition-all`}
+            >
+              <input
+                type='text'
+                className='w-full flex justify-center border rounded p-3 my-1'
+                placeholder='Location'
+                required
+              />
+              <input
+                type='text'
+                className='w-full flex justify-center border rounded p-3'
+                placeholder='Description'
+                required
+              />
+              <div className='w-100 my-2 flex justify-between '>
+                <div>
+                  <button
+                    type='button'
+                    class='py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700'
+                  >
+                    Delete
+                  </button>{' '}
+                </div>
+                <div>
+                  <button
+                    type='button'
+                    class='py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700'
+                  >
+                    Cancel
+                  </button>{' '}
+                  <button
+                    type='button'
+                    class='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
+                  >
+                    Save
+                  </button>{' '}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </StyleModal>
-    </Box>
+    </div>
   );
 }

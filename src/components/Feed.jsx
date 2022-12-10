@@ -1,68 +1,11 @@
-import { Add, Delete, MoreVert } from '@mui/icons-material';
-import {
-  Box,
-  Card,
-  CardHeader,
-  IconButton,
-  InputBase,
-  Paper,
-} from '@mui/material';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-import { styled, alpha } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-
 import { useContext } from 'react';
 import { StateContext } from '../context/StateContext';
 import Table from './Table';
 
-const StyledMenu = styled((props) => (
-  <Menu
-    elevation={0}
-    anchorOrigin={{
-      vertical: 'bottom',
-      horizontal: 'right',
-    }}
-    transformOrigin={{
-      vertical: 'top',
-      horizontal: 'right',
-    }}
-    {...props}
-  />
-))(({ theme }) => ({
-  '& .MuiPaper-root': {
-    borderRadius: 6,
-    marginTop: theme.spacing(1),
-    minWidth: 180,
-    color:
-      theme.palette.mode === 'light'
-        ? 'rgb(55, 65, 81)'
-        : theme.palette.grey[300],
-    boxShadow:
-      'rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px',
-    '& .MuiMenu-list': {
-      padding: '4px 0',
-    },
-    '& .MuiMenuItem-root': {
-      '& .MuiSvgIcon-root': {
-        fontSize: 18,
-        color: theme.palette.text.secondary,
-        marginRight: theme.spacing(1.5),
-      },
-      '&:active': {
-        backgroundColor: alpha(
-          theme.palette.primary.main,
-          theme.palette.action.selectedOpacity
-        ),
-      },
-    },
-  },
-}));
 
 const currencies = [
   {
@@ -119,24 +62,18 @@ export default function Feed() {
     setCurrency(e.target.value);
   };
 
+
   // const filterdata = data.data?.filter((items) => {
   //   return items.value === e.target.value;
   // });
   // console.log(currency);
 
   return (
-    <Box
-      sx={{
-        width: '100%',
-        bgcolor: '#efefef',
-        height: '100vh',
-      }}
-    >
-      <Box sx={{ ml: '300px', height: '100%' }}>
-        <Box sx={{ mt: '30px' }}>
-          <h1>Adminstration</h1>
+      <div style={{marginTop:"120px"}}>
+        <div>
+          <h1 className='h1'>Adminstration</h1>
 
-          <Box sx={{ display: 'flex' }}>
+          <div className='d-flex'>
             <button
               style={{
                 border: 'none',
@@ -183,16 +120,10 @@ export default function Feed() {
             >
               Master Data
             </button>
-          </Box>
-        </Box>
+          </div>
+        </div>
         <h2>Master Data category</h2>
-        <Box
-          sx={{
-            mb: '10px',
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
+        <div style={{ mb: '10px', display: 'flex', alignItems: 'center' }}>
           <TextField
             sx={{ mt: '10px', mb: '10px', mr: '10px', width: 220 }}
             id='outlined-select-currency'
@@ -207,30 +138,23 @@ export default function Feed() {
               </MenuItem>
             ))}
           </TextField>
-          <Paper
-            component='form'
-            sx={{
-              p: '2px 4px',
-              display: 'flex',
-              alignItems: 'center',
-              width: 220,
-            }}
-          >
-            <InputBase
-              sx={{ ml: 1, flex: 1 }}
-              placeholder='Search...'
-              inputProps={{ 'aria-label': 'search...' }}
-            />
-            <IconButton type='button' sx={{ p: '10px' }} aria-label='search'>
-              <SearchIcon />
-            </IconButton>
-          </Paper>
-        </Box>
+          
+<form>   
+    <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+    <div class="relative">
+        <input type="search" id="default-search" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." required />
+        <div class="absolute inset-y-0 right-2 flex items-center pl-3 pointer-events-none">
+            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </div>
+    </div>
+</form>
+ 
 
-        <Card>
+        </div>
+
+        <div className='card' style={{ width: '100%' }}>
           <Table />
-        </Card>
-      </Box>
-    </Box>
+        </div>
+      </div>
   );
 }

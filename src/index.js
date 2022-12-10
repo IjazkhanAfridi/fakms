@@ -9,7 +9,6 @@ root.render(
   <React.StrictMode>
     <StateContextProvider>
           <App />
-
     </StateContextProvider>
   </React.StrictMode>
 );

@@ -1,56 +1,67 @@
 import React from 'react';
-import {
-  Box,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  Typography,
-} from '@mui/material';
 
 export default function Sidebar() {
   return (
-<>
-    <Box sx={{width:"10%"}} p={2}>
-      <Box position='fixed' sx={{width:"10%"}}>
-        <List sx={{height:"65vh"}}>
-          <ListItem disablePadding>
-              <ListItemText primary={<Typography variant="h5" style={{marginBottom:"20px"}} >FAKMS</Typography>} />
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemText primary='Pages' />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-               <ListItemText primary='Group' />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>       
-              <ListItemText primary='Drafts' />
-            </ListItemButton>
-          </ListItem>
-          
-        </List>
-        <List >
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemText primary='Reports' />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-               <ListItemText primary='Admin' />
-            </ListItemButton>
-          </ListItem>
-        </List>
-      </Box>
-    </Box>
-
-
-        
-      </>
+    <>
+      <aside class='w-64 mt-10' aria-label='Sidebar'>
+        <div class='overflow-y-auto py-4 h-screen px-3 bg-gray-50 rounded dark:bg-gray-800'>
+          <ul class='space-y-2'>
+            <li>
+              <a
+                href='#'
+                class='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
+              >
+                <span class='ml-3'>FAKMS</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href='#'
+                class='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
+              >
+                <span class='flex-1 ml-3 whitespace-nowrap'>Pages</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href='#'
+                class='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
+              >
+                <span class='flex-1 ml-3 whitespace-nowrap'>Group</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href='#'
+                class='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
+              >
+                <span class='flex-1 ml-3 whitespace-nowrap'>Drafts</span>
+              </a>
+            </li>
+          </ul>
+          <ul
+            class='space-y-2 border-t border-gray-200 dark:border-gray-700'
+            style={{ marginTop: '55vh' }}
+          >
+            <li>
+              <a
+                href='#'
+                class='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group'
+              >
+                <span class='ml-4'>Reports</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href='#'
+                class='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group'
+              >
+                <span class='ml-3'>Admin</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </>
   );
 }
